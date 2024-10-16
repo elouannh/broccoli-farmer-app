@@ -3,8 +3,10 @@
 
 <template>
   <main class="index-main">
-    <broccoli-counter class="main-element"></broccoli-counter>
-    <farms-display class="main-element"></farms-display>
+    <broccoli-counter class="main-element"/>
+    <economy class="main-element"/>
+    <farms-display class="main-element"/>
+    <automation class="main-element"/>
   </main>
 </template>
 

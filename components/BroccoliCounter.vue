@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { useGameStore } from "~/stores/game";
 import {storeToRefs} from "pinia";
+import ClassicButton from "~/components/buttons/ClassicButton.vue";
 
 const store = useGameStore();
 
-const { count } = storeToRefs(store);
+const { farming, economy } = storeToRefs(store);
 const { increment, sell } = store;
 </script>
 
 <template>
   <main class="broccoli-counter-main">
     <h1>Click to summon some broccoli. 🥦</h1>
-    <h1 class="broccoli-count">{{ Math.ceil(count) }}</h1>
-    <button class="broccoli-summoner" @click="increment">+🥦</button>
-    <button class="broccoli-seller" @click="sell">Sell</button>
+    <h1 class="broccoli-count">{{ Math.ceil(farming.count) }}</h1>
+    <classic-button content="+🥦" :onclick="increment"/>
+    <classic-button :content="`Sell 💰 (+$${(farming.count * economy.sellingPrice).toFixed(2)})`" :onclick="sell"/>
   </main>
 </template>
 
@@ -30,12 +31,6 @@ const { increment, sell } = store;
 
   .broccoli-count {
     font-size: 100px;
-  }
-
-  .broccoli-summoner, .broccoli-seller {
-    width: 70px;
-    height: 60px;
-    font-size: 20px;
   }
 }
 </style>

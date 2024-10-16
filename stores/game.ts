@@ -3,25 +3,33 @@ import type {Farm, GameStore} from "~/types/game";
 
 export const useGameStore: StoreDefinition = defineStore('game', {
     state: (): GameStore => ({
-        count: 0,
-        farms: [{ capacity: 10, id: 0 }]
+        farming: {
+            count: 0,
+            farms: [{ capacity: 10, id: 0 }]
+        },
+        economy: {
+            wallet: 0,
+            sellingPrice: 0.50,
+        }
     }),
     getters: {
-        getCount: (state: GameStore) => state.count,
-        getFarms: (state: GameStore) => state.farms,
-        getFarmById: (state: GameStore) => (id: number) => state.farms.filter((f: Farm): boolean => f.id === id).at(0),
+        getFarmById: (state: GameStore) => (id: number) => state.farming.farms.filter((f: Farm): boolean => f.id === id).at(0),
     },
     actions: {
         increment(): void {
-            this.count += this.farms.reduce((sum: number, f: Farm) => sum + f.capacity / 10, 0);
+            this.farming.count += this.farming.farms.reduce((sum: number, f: Farm) => sum + f.capacity / 10, 0);
         },
         upgradeFarm(id: number): void {
             const farm: Farm | undefined = this.getFarmById(id);
 
             if (!farm) return;
+            this.economy.wallet -= farm.capacity * 5;
             farm.capacity++;
-            this.count -= farm.capacity * 10;
-            this.farms = this.farms.map((f: Farm): Farm => f.id === farm.id ? farm : f);
+            this.farming.farms = this.farming.farms.map((f: Farm): Farm => f.id === farm.id ? farm : f);
+        },
+        sell(): void {
+            this.economy.wallet += this.farming.count * this.economy.sellingPrice;
+            this.farming.count = 0;
         }
     }
 });

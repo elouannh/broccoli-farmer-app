@@ -4,6 +4,12 @@ export interface Farm {
 }
 
 export interface GameStore {
-    count: number;
-    farms: Farm[];
+    farming: {
+        count: number;
+        farms: Farm[];
+    };
+    economy: {
+        wallet: number;
+        sellingPrice: number;
+    };
 }
