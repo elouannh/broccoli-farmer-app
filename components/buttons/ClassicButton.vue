@@ -16,7 +16,7 @@ const disabledFunc = computed(() => {
   </button>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .classic-button {
   border: none;
   background-color: #454545;

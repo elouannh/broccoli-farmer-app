@@ -18,7 +18,7 @@ const { increment, sell } = store;
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 * {
   font-family: 'Roboto', monospace;
 }

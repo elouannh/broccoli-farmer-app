@@ -16,7 +16,7 @@ const { economy } = storeToRefs(store);
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 * {
   font-family: 'Roboto', monospace;
 }
